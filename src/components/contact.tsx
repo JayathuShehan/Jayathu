@@ -1,13 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Mail, Instagram, Facebook, Linkedin, Github, Twitter, MessageCircle } from 'lucide-react';
+import { Mail, Instagram, Linkedin, Github, Twitter, MessageCircle } from 'lucide-react';
 
 const contactDetails = [
     { icon: Mail, label: 'Email', value: 'jayathushehan@gmail.com', href: 'mailto:jayathushehan@gmail.com' },
     { icon: MessageCircle, label: 'WhatsApp', value: '+94 70 310 8994', href: 'https://wa.me/94703108994' },
     { icon: Instagram, label: 'Instagram', value: '@s_h_e_h_a_n_.dew', href: 'https://www.instagram.com/s_h_e_h_a_n_.dew/' },
-    { icon: Facebook, label: 'Facebook', value: 'Jayathu Shehan', href: 'https://www.facebook.com/jayathu.shehan' },
     { icon: Linkedin, label: 'LinkedIn', value: 'Jayathu Shehan', href: 'https://www.linkedin.com/in/jayathu-shehan-516752249/' },
     { icon: Github, label: 'GitHub', value: 'JayathuShehan', href: 'https://github.com/JayathuShehan' },
     { icon: Twitter, label: 'X (Twitter)', value: '@s89736', href: 'https://x.com/s89736' },

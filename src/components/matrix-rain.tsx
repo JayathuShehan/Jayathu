@@ -21,6 +21,7 @@ const MatrixRain = ({ className }: MatrixRainProps) => {
         let height = window.innerHeight;
 
         // Characters - Katakana + Latin
+        // const chars = '0100101010010001010100010100101001001000010010001001000101000101001000101111010110110001001111110100111101001010101011010101111001000010010010001100010010100100110010001001010010010001101100110010001010100101001011100011010010010100101001';
         const chars = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         const charArray = chars.split('');
 
@@ -87,24 +88,33 @@ const MatrixRain = ({ className }: MatrixRainProps) => {
                 // Random character
                 const text = charArray[Math.floor(Math.random() * charArray.length)];
 
-                // Mouse interaction logic
-                const columnX = i * fontSize;
-                const distX = Math.abs(columnX - mouseX);
+                // Coordinates
+                const x = i * fontSize;
+                const y = drops[i] * fontSize;
 
-                // Determine if this drop is near mouse vertically 
-                // We use the current drop position estimate
-                const currentY = drops[i] * fontSize;
-                const distY = Math.abs(currentY - mouseY);
+                let drawX = x;
+                let drawY = y;
 
-                // If mouse is close, highlight
-                let isHighlighted = false;
-                if (isMouseActive && distX < 100 && distY < 100) {
-                    ctx.fillStyle = '#CFFFCD'; // Brighter whitish-green near mouse
+                // Obstacle Interaction (Mouse)
+                const dist = Math.hypot(x - mouseX, y - mouseY);
+                const obstacleRadius = 150; // Interaction radius
+
+                if (isMouseActive && dist < obstacleRadius) {
+                    // Calculate repulsion
+                    const angle = Math.atan2(y - mouseY, x - mouseX);
+                    // Force is stronger closer to center
+                    const force = (obstacleRadius - dist) / obstacleRadius;
+                    const power = 120; // Pixel displacement power - Strong Jump
+
+                    drawX += Math.cos(angle) * force * power;
+                    drawY += Math.sin(angle) * force * power;
+
+                    // Highlight interaction
+                    ctx.fillStyle = '#CFFFCD';
                     ctx.shadowColor = "rgba(200, 255, 200, 0.8)";
                     ctx.shadowBlur = 15;
-                    isHighlighted = true;
                 } else {
-                    // Randomly make some characters brighter
+                    // Standard Matrix style
                     if (Math.random() > 0.98) {
                         ctx.fillStyle = '#8F8';
                         ctx.shadowColor = "rgba(100, 255, 100, 0.8)";
@@ -114,14 +124,7 @@ const MatrixRain = ({ className }: MatrixRainProps) => {
                     }
                 }
 
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                // Reset styles
-                if (isHighlighted) {
-                    ctx.fillStyle = '#0F0';
-                    ctx.shadowBlur = 8;
-                    ctx.shadowColor = "rgba(0, 255, 0, 0.5)";
-                }
+                ctx.fillText(text, drawX, drawY);
 
                 // Reset drop to top randomly after it crosses screen
                 // Adding randomness to the reset to prevent patterns
@@ -130,7 +133,6 @@ const MatrixRain = ({ className }: MatrixRainProps) => {
                 }
 
                 // Move drop down
-                // Speed variation based on column for depth effect
                 drops[i]++;
             }
 
