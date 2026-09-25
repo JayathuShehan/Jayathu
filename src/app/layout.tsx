@@ -1,15 +1,12 @@
-import type { Metadata } from 'next';
-import { Geist_Mono } from 'next/font/google';
-import './globals.css';
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
 
-const geistMono = Geist_Mono({
-  subsets: ['latin'],
-  variable: '--font-geist-mono',
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Jayathu Shehan Dewmina | Full Stack Developer',
-  description: 'Portfolio of Jayathu Shehan Dewmina - Full Stack Developer & Tech Enthusiast',
+  title: "App",
+  description: "Next.js Application",
 };
 
 export default function RootLayout({
@@ -19,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistMono.variable} antialiased`}>
+      <body className={`${inter.className} min-h-screen bg-background text-foreground antialiased`}>
         {children}
       </body>
     </html>
