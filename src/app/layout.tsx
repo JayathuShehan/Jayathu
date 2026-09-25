@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
-  title: "App",
-  description: "Next.js Application",
+  title: "Mainframe® — Creative Agency",
+  description: "Mainframe is a creative agency. Meet A.R.I.A, Mainframe's Adaptive Response Interface Agent.",
 };
 
 export default function RootLayout({
@@ -15,8 +12,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} min-h-screen bg-background text-foreground antialiased`}>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://db.onlinewebfonts.com/c/5ac3fe7c6abd2f62067f266d89671492?family=HelveticaNowDisplay-Medium"
+          type="text/css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://db.onlinewebfonts.com/c/1aa3377e489837a26d019bba501e779d?family=HelveticaNowDisplayW01-Rg"
+          type="text/css"
+        />
+      </head>
+      <body className="antialiased" suppressHydrationWarning>
         {children}
       </body>
     </html>
