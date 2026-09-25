@@ -92,7 +92,8 @@ export default function Home() {
 
   // Window mousemove / touchmove listener for video scrubbing
   useEffect(() => {
-    const SENSITIVITY = 0.8;
+    // Negative = video plays opposite to the pointer's horizontal movement
+    const SENSITIVITY = -0.8;
 
     const handleMouseMove = (e: MouseEvent) => {
       if (prevXRef.current === null) {
@@ -297,6 +298,9 @@ export default function Home() {
         className="fixed inset-0 z-0 h-full w-full object-cover pointer-events-none select-none"
         style={{
           objectPosition: "70% center",
+          // Mirror, zoom and shift so the character sits in the horizontal center
+          transformOrigin: "50% 0%",
+          transform: "translateX(-15%) scale(-1.3, 1.3)",
         }}
       />
 
