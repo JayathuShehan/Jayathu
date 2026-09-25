@@ -298,9 +298,8 @@ export default function Home() {
         className="fixed inset-0 z-0 h-full w-full object-cover pointer-events-none select-none"
         style={{
           objectPosition: "70% center",
-          // Mirror, zoom and shift so the character sits in the horizontal center
-          transformOrigin: "50% 0%",
-          transform: "translateX(-15%) scale(-1.3, 1.3)",
+          // Mirror horizontally so the character sits on the right side (no zoom)
+          transform: "scale(-1, 1)",
         }}
       />
 
